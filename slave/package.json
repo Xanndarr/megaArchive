@@ -1,0 +1,15 @@
+{
+  "name": "slave",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=8000 forever start index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^0.15.3",
+    "restify": "^4.3.0"
+  }
+}
