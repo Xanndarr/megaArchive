@@ -16,15 +16,12 @@ function alive(req, res, next) {
 
 // POST /pull { url } => start downloading from url
 function pull(req, res, next) {
-  try {
+  if (dlInstance.progress() === 'error') {
     id = uuid();
     dlInstance.start(req.body.url);
-    res.send({ id });
-  } catch (e) {
-    res.send({ error: 'dun goofed' });
-  } finally {
-    next();
   }
+  res.send({ id });
+  next();
 }
 
 // POST /progress { id } => download progress

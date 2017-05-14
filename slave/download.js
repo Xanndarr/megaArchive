@@ -1,5 +1,6 @@
 var spawn = require('child_process').spawn;
 var fs = require('fs');
+var rimraf = require('rimraf');
 var DL_FOLDER = 'dl/';
 
 function Downloader() {
@@ -8,8 +9,9 @@ function Downloader() {
 
   this.start = function(url) {
     if (proc) return;
+    rimraf.sync(DL_FOLDER);
     fs.mkdirSync(DL_FOLDER);
-    proc = spawn('megadl', [`--path ${DL_FOLDER}`, url]);
+    proc = spawn('megadl', ['--path', DL_FOLDER, url]);
 
     proc.stdout.on('data', function(data) {
       var progress = data.toString().match(/\d+.\d+%/);
@@ -25,22 +27,22 @@ function Downloader() {
     proc.on('exit', function(code) {
       if (code === 0) {
         console.log('megadl: success');
+        downloadProgress = '100%';
+        // encrypt etc
       } else {
         console.log('megadl: error');
-        stop();
+        downloadProgress = 'error';
       }
     });
   };
 
   this.progress = function() {
-    if (!proc) return 'error';
-    return downloadProgress;
+    return proc ? downloadProgress : 'error';
   };
 
   this.stop = function() {
-    if (!proc) return;
-    proc.kill();
-    fs.rmdirSync(DL_FOLDER);
+    if (proc) proc.kill();
+    rimraf.sync(DL_FOLDER);
     proc = undefined;
   };
 }
