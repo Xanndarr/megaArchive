@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -V -w index.js",
     "start": "PORT=8000 forever start index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "forever": "^0.15.3",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "rsync": "^0.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

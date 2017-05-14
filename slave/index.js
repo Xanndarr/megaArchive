@@ -9,8 +9,23 @@ function alive(req, res, next) {
   next();
 }
 
+function pull(req, res, next) {
+  try {
+    console.log('pull');
+    throw Error();
+    res.send();
+  } catch (e) {
+    res.send({ error: 'dun goofed' });
+  } finally {
+    next();
+  }
+}
+
 var server = restify.createServer();
+server.use(restify.bodyParser({ mapParams: false }));
+
 server.get('/alive', alive);
+server.post('/pull', pull);
 
 server.listen(port, function() {
   console.log('Listening on :%s', port);
