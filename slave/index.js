@@ -1,7 +1,12 @@
 var restify = require('restify');
+var uuid = require('uuid/v4');
+
 var utils = require('./utils.js');
+var Downloader = require('./download.js').Downloader;
 
 var port = process.env.PORT || 8080;
+var dlInstance = new Downloader();
+var id;
 
 // GET /alive => are we alive yet?
 function alive(req, res, next) {
@@ -9,11 +14,12 @@ function alive(req, res, next) {
   next();
 }
 
+// POST /pull { url } => start downloading from url
 function pull(req, res, next) {
   try {
-    console.log('pull');
-    throw Error();
-    res.send();
+    id = uuid();
+    dlInstance.start(req.body.url);
+    res.send({ id });
   } catch (e) {
     res.send({ error: 'dun goofed' });
   } finally {
@@ -21,11 +27,35 @@ function pull(req, res, next) {
   }
 }
 
+// POST /progress { id } => download progress
+function progress(req, res, next) {
+  if (req.body.id === id) {
+    res.send({ progress: dlInstance.progress() });
+  } else {
+    res.send();
+  }
+  next();
+}
+
+// POST /stop { id } => stop download
+function stop(req, res, next) {
+  if (req.body.id === id) {
+    dlInstance.stop();
+    id = undefined;
+    res.send({ status: 'Job cancelled' });
+  } else {
+    res.send();
+  }
+  next();
+}
+
 var server = restify.createServer();
 server.use(restify.bodyParser({ mapParams: false }));
 
 server.get('/alive', alive);
 server.post('/pull', pull);
+server.post('/progress', progress);
+server.post('/stop', stop);
 
 server.listen(port, function() {
   console.log('Listening on :%s', port);
