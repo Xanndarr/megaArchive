@@ -1,2 +1,4 @@
 **/node_modules/**
 **/dl/
+*.pem
+*.tar.gz*

@@ -2,12 +2,13 @@ var spawn = require('child_process').spawn;
 var fs = require('fs');
 var rimraf = require('rimraf');
 var DL_FOLDER = 'dl/';
+var encrypt = require('./encrypt.js');
 
 function Downloader() {
   var downloadProgress = undefined;
   var proc = undefined;
 
-  this.start = function(url) {
+  this.start = function(url, pub_key) {
     if (proc) return;
     downloadProgress = '0%';
     rimraf.sync(DL_FOLDER);
@@ -29,7 +30,7 @@ function Downloader() {
       if (code === 0) {
         console.log('megadl: success');
         downloadProgress = '100%';
-        // encrypt etc
+        encrypt.run(pub_key);
       } else {
         console.log('megadl: error');
         downloadProgress = 'error';
