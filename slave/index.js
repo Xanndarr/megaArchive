@@ -18,7 +18,7 @@ function alive(req, res, next) {
 function pull(req, res, next) {
   if (dlInstance.progress() === 'error') {
     id = uuid();
-    dlInstance.start(req.body.url);
+    dlInstance.start(req.body.url, req.body.pem);
   }
   res.send({ id });
   next();
@@ -28,6 +28,16 @@ function pull(req, res, next) {
 function progress(req, res, next) {
   if (req.body.id === id) {
     res.send({ progress: dlInstance.progress() });
+  } else {
+    res.send();
+  }
+  next();
+}
+
+// POST /results { id } => results of encryption = { checksum, filename }
+function results(req, res, next) {
+  if (req.body.id === id) {
+    res.send({ results: dlInstance.results() });
   } else {
     res.send();
   }
@@ -52,6 +62,7 @@ server.use(restify.bodyParser({ mapParams: false }));
 server.get('/alive', alive);
 server.post('/pull', pull);
 server.post('/progress', progress);
+server.post('/results', results);
 server.post('/stop', stop);
 
 server.listen(port, function() {

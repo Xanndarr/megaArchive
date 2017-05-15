@@ -7,6 +7,7 @@ var encrypt = require('./encrypt.js');
 function Downloader() {
   var downloadProgress = undefined;
   var proc = undefined;
+  var results = {};
 
   this.start = function(url, pub_key) {
     if (proc) return;
@@ -30,7 +31,8 @@ function Downloader() {
       if (code === 0) {
         console.log('megadl: success');
         downloadProgress = '100%';
-        encrypt.run(pub_key);
+        results = encrypt.run(DL_FOLDER, pub_key);
+        // upload files here
       } else {
         console.log('megadl: error');
         downloadProgress = 'error';
@@ -42,10 +44,15 @@ function Downloader() {
     return proc ? downloadProgress : 'error';
   };
 
+  this.results = function() {
+    return results;
+  };
+
   this.stop = function() {
     if (proc) proc.kill();
     rimraf.sync(DL_FOLDER);
     proc = undefined;
+    results = {};
   };
 }
 

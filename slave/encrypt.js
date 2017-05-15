@@ -3,13 +3,11 @@ var fs = require('fs');
 var uuid = require('uuid/v4');
 var md5 = require('md5-file').sync;
 
-var DL_FOLDER = require('./download.js').DL_FOLDER;
-
-function run(pub_key) {
+function run(path, pub_key) {
   console.log('Compressing...');
-  var filename = compress();
+  var filename = compress(path);
   if (!filename) return;
-  console.log(`${DL_FOLDER} => ${filename}`);
+  console.log(`${path} => ${filename}`);
   var enc_filename = encrypt(filename, pub_key);
   console.log(`${filename} => ${enc_filename}`);
   var checksum = md5(enc_filename);
@@ -17,9 +15,9 @@ function run(pub_key) {
   return { filename: enc_filename, checksum };
 }
 
-function compress() {
+function compress(path) {
   var filename = `${uuid()}.tar.gz`;
-  var proc = spawn('tar', ['-zcvf', filename, DL_FOLDER]);
+  var proc = spawn('tar', ['-zcvf', filename, path]);
 
   if (proc.error) return;
   return filename;
