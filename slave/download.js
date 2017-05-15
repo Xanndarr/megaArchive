@@ -10,9 +10,10 @@ var DL_FOLDER = 'dl/';
 function Downloader() {
   var downloadProgress = undefined;
   var proc = undefined;
-  var results = {};
+  var results = {}; // { filename, checksum, acd, gdrive }
+  var uploadProgress = {}; // { acd, gdrive }
 
-  this.start = function(url, pub_key) {
+  this.start = function(url, pub_key, instance) {
     if (proc) return;
     downloadProgress = '0%';
     rimraf.sync(DL_FOLDER);
@@ -35,7 +36,7 @@ function Downloader() {
         console.log('megadl: success');
         downloadProgress = '100%';
         results = encrypt.run(DL_FOLDER, pub_key);
-        upload.run(results.filename);
+        upload.run(results.filename, instance);
       } else {
         console.log('megadl: error');
         downloadProgress = 'error';
@@ -43,12 +44,27 @@ function Downloader() {
     });
   };
 
+  this.doSomething = function() {
+    downloadProgress = 'hello';
+  };
+
+  this.getSomething = function() {
+    return downloadProgress;
+  };
+
   this.progress = function() {
     return proc ? downloadProgress : 'error';
   };
 
+  this.setUploadProgress = function(progress) {
+    if (progress.acd) uploadProgress.acd = progress.acd;
+    if (progress.gdrive) uploadProgress.gdrive = progress.gdrive;
+  };
+
   this.results = function() {
-    return results;
+    var res = results;
+    res.uploadProgress = uploadProgress;
+    return res;
   };
 
   this.stop = function() {

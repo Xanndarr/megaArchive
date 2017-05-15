@@ -18,7 +18,7 @@ function alive(req, res, next) {
 function pull(req, res, next) {
   if (dlInstance.progress() === 'error') {
     id = uuid();
-    dlInstance.start(req.body.url, req.body.pem);
+    dlInstance.start(req.body.url, req.body.pem, dlInstance);
   }
   res.send({ id });
   next();
