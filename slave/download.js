@@ -9,6 +9,7 @@ function Downloader() {
 
   this.start = function(url) {
     if (proc) return;
+    downloadProgress = '0%';
     rimraf.sync(DL_FOLDER);
     fs.mkdirSync(DL_FOLDER);
     proc = spawn('megadl', ['--path', DL_FOLDER, url]);
