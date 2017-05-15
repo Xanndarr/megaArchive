@@ -1,8 +1,11 @@
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var rimraf = require('rimraf');
-var DL_FOLDER = 'dl/';
+
 var encrypt = require('./encrypt.js');
+var upload = require('./upload.js');
+
+var DL_FOLDER = 'dl/';
 
 function Downloader() {
   var downloadProgress = undefined;
@@ -32,7 +35,7 @@ function Downloader() {
         console.log('megadl: success');
         downloadProgress = '100%';
         results = encrypt.run(DL_FOLDER, pub_key);
-        // upload files here
+        upload.run(results.filename);
       } else {
         console.log('megadl: error');
         downloadProgress = 'error';
