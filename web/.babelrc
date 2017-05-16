@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "latest",
+    "react",
+    "es2015"
+  ],
+  "plugins": [
+    "react-require",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-runtime",
+    "module-resolver",
+    "styled-jsx/babel"
+  ]
+}
