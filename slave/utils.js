@@ -1,3 +1,5 @@
+var DL_FOLDER = 'dl/';
+
 function uptime() {
   var seconds = process.uptime();
   function pad(s) {
@@ -10,4 +12,4 @@ function uptime() {
   return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
 }
 
-module.exports = { uptime };
+module.exports = { uptime, DL_FOLDER };
