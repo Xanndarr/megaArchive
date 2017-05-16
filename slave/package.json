@@ -1,0 +1,19 @@
+{
+  "name": "slave",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=8000 forever start index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^0.15.3",
+    "md5-file": "^3.1.1",
+    "restify": "^4.3.0",
+    "rimraf": "^2.6.1",
+    "rsync": "^0.6.1",
+    "uuid": "^3.0.1"
+  }
+}

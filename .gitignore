@@ -1,0 +1,5 @@
+**/node_modules/**
+**/dl/
+*.pem
+*.tar.gz*
+npm-debug.log
