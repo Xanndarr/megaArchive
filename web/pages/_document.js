@@ -1,5 +1,13 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
+import { injectGlobal } from 'styled-components';
+
+injectGlobal`
+  body {
+    background-color: white;
+    color: red;
+  }
+`;
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
