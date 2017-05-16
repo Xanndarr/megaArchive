@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -V -w index.js",
     "start": "PORT=8000 forever start index.js"
   },
   "author": "",
@@ -16,8 +15,5 @@
     "rimraf": "^2.6.1",
     "rsync": "^0.6.1",
     "uuid": "^3.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
   }
 }
