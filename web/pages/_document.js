@@ -1,11 +1,27 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import { injectGlobal } from 'styled-components';
+import { media } from '../style';
 
 injectGlobal`
+  @font-face {
+    font-family: ProximaNovaRegular;
+    src: url(/static/font/ProximaNovaRegular.otf);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: ProximaNovaBold;
+    src: url(/static/font/ProximaNovaSemibold.otf);
+    font-weight: bold;
+  }
+
   body {
-    background-color: white;
-    color: red;
+    font-family: ProximaNovaRegular;
+    text-transform: uppercase;
+    background-color: #f7f7f7;
+    color: #B31B1B;
+    margin: 0;
   }
 `;
 

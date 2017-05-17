@@ -14,6 +14,11 @@ app.prepare().then(() => {
 
   server.get('*', (req, res) => handle(req, res));
 
+  server.post('/api', (req, res) => {
+    console.log(req);
+    res('somethin');
+  });
+
   server.listen(port, err => {
     if (err) throw err;
     console.log(`Listening on 0.0.0.0:${port}`);
