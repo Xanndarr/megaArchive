@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import cloudImage from 'static/cloud.png';
+
 const Form = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   position: relative;
   box-sizing: border-box;
   border-radius: 2px;
@@ -50,7 +53,7 @@ const Download = styled.input`
   border: none;
   background-size: 35px 35px;
   background-position: 50% 50%;
-  background-image: url(/static/cloud.png);
+  background-image: url(${cloudImage});
   background-repeat: no-repeat;
 `;
 
