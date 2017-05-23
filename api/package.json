@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "start": "node index.js"
+    "start": "node index.js",
+    "prettier": "prettier --write --print-width 100 --single-quote --trailing-comma all --parser babylon"
   },
   "author": "",
   "license": "ISC",

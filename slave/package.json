@@ -6,7 +6,8 @@
   "scripts": {
     "forever": "PORT=8000 forever start index.js",
     "start": "node index.js",
-    "pre-commit": "lint-staged"
+    "precommit": "lint-staged",
+    "prettier": "prettier --write --print-width 100 --single-quote --trailing-comma all --parser babylon"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "lint-staged": "^3.4.2"
   },
   "lint-staged": {
+    "gitDir": "../",
     "*.js": [
       "prettier --write --print-width 100 --single-quote --trailing-comma all --parser babylon",
       "git add"
