@@ -24,16 +24,25 @@ NPM commands can be found in each projects' `package.json`.
 `api/`:
 - `npm run start` -> Start the API (built with [Restify](https://github.com/restify/node-restify))
 - `PORT=$PORT npm run start` -> Start API on port `$PORT`
+- `npm run prettier -- *.js` -> Run [Prettier](https://github.com/prettier/prettier/) on all .js files
 
 `app/`:
 - `npm run build` -> Build with webpack
 - `npm run start` -> Start webpack server locally. Builds project first on start. Supports hot-reloading
+- `npm run prettier -- *.js` -> Run [Prettier](https://github.com/prettier/prettier/) on all .js files
 
 `slave/`:
 - `npm run start` -> Start the API (built with [Restify](https://github.com/restify/node-restify))
 - `PORT=$PORT npm run start` -> Start API on port `$PORT`
+- `npm run prettier -- *.js` -> Run [Prettier](https://github.com/prettier/prettier/) on all .js files
 
 ## Linting + Code Quality
 `app/` uses ES6 syntax. `api/` and `slave/` use ES5.
 
-Code is formatted with Prettier before commit. Might be an idea to install the prettier plugin for your favourite editor.
+Code is formatted with [Prettier](https://github.com/prettier/prettier/) before commit. Might be an idea to install the prettier plugin for your favourite editor.
+
+Config settings used. Set these if you install plugin for editor:
+- `print-width` -> 100 = how long each line is
+- `single-quote` -> Use single quotes instead of double
+- `trailing-comma` -> all = Add all trailing commas. ES6 AirBnB standard
+- `parser` -> babylon = required for ES6 syntax
