@@ -1,5 +1,6 @@
 **/node_modules/**
 **/dl/
+.next
 *.pem
 *.tar.gz*
 npm-debug.log
