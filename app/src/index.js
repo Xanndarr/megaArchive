@@ -12,7 +12,7 @@ import reducer from 'src/containers/Root/reducer';
 
 import proximaNovaRegular from 'static/font/ProximaNovaRegular.otf';
 import proximaNovaBold from 'static/font/ProximaNovaSemiBold.otf';
-import proximaNovaThin from 'static/font/proximaNovaThin.otf';
+import proximaNovaThin from 'static/font/ProximaNovaThin.otf';
 
 const production = process.env.NODE_ENV === 'production';
 const logger = createLogger();
